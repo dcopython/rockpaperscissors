@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors</title>
+</head>
+
+<body>
+    <script>
+        function computerPlay() {
+            return moves[Math.floor(Math.random()*moves.length)];
+        }
+
+        function playRound(playerSelection, computerSelection) {
+
+            if (playerSelection == computerSelection) {
+                msg = "You tied!";
+            }
+            else if (playerSelection == "rock" && computerSelection == "scissors") {
+                msg = "You win!, Rock beats Scissors";
+            }
+            else if (playerSelection == "paper" && computerSelection == "rock") {
+                msg = "You win!, Paper beats Rock";
+            }
+            else if (playerSelection == "scissors" && computerSelection == "paper") {
+                msg = "You win!, Scissors beats Paper";
+            }
+            else {
+                msg = `You lose! ${computerSelection} beats ${playerSelection}`;
+            }
+        }
+
+        function game() {
+            for (i = 0; i < 5; i++) {
+                playRound(answer, computerSelection);
+
+                computerSelection = computerPlay();
+
+                if (msg.search("You win!")) {
+                    playerScore++;
+                }
+                else {
+                    computerScore++;
+                }
+            }
+
+            if (playerScore == computerScore) {
+                msg = "Tie Game!";
+            }
+            else if (playerScore > computerScore) {
+                msg = "Player Wins!";
+            }
+            else {
+                msg = "Computer Wins!";
+            }
+
+            console.log(`${msg}, ${playerScore} to ${computerScore}`);
+        }
+
+        let playerScore = 0;
+        let computerScore = 0;
+
+        let moves = ["rock", "paper", "scissors"];
+
+        let computerSelection = computerPlay();
+
+        let msg = "";
+
+        let answer = prompt("Pick Rock, Paper, or Scissors").toLowerCase();
+
+        while (!(moves.includes(answer))) {
+            answer = prompt("Please pick a valid choice, Rock/Paper/Scissors");
+        }
+        
+        game();
+
+    </script>
+</body>
+</html>
